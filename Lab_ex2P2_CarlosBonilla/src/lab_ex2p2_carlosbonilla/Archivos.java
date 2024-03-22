@@ -33,7 +33,8 @@ public class Archivos {
             ob = new ObjectOutputStream(output);
             ob.writeObject(carros);
             ob.flush();
-
+            output.close();
+            ob.close();
             
              
         }catch(IOException e){
@@ -49,6 +50,8 @@ public class Archivos {
             input = new FileInputStream(archivo);
             obj = new ObjectInputStream(input);
             carros = (ArrayList<Carros>) obj.readObject();
+            input.close();
+            obj.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException ex) {

@@ -25,10 +25,10 @@ Archivos adm=new Archivos();
      */
     public main() throws IOException {
         initComponents();
-        carros.add(new Carros(2,"juan","alberto"));
-        carros.add(new Carros(5,"pedro","sebastian"));
-        adm.setarchivo(carros);
         carros=adm.getarchivo();
+          adm.setarchivo(carros);
+      
+        
         DefaultComboBoxModel m1=(DefaultComboBoxModel)cboxP1.getModel();
         DefaultComboBoxModel m2=(DefaultComboBoxModel)cboxP2.getModel();
         for (int i = 0; i < carros.size(); i++) {
