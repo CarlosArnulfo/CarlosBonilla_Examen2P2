@@ -25,7 +25,6 @@ Archivos adm=new Archivos();
      */
     public main() throws IOException {
         initComponents();
-        
         carros.add(new Carros(2,"juan","alberto"));
         carros.add(new Carros(5,"pedro","sebastian"));
         adm.setarchivo(carros);
@@ -427,7 +426,7 @@ Archivos adm=new Archivos();
        jf_Play.pack();
        jf_Play.setLocationRelativeTo(this);
        jf_Play.setVisible(true);
-        Carrera h=new Carrera(Integer.valueOf(tf_VelocidadP1.getText()),Integer.valueOf(tf_VelocidadP2.getText()),barra1,barra2,cronometroP1,tf_ModeloP1.getText(),tf_ModeloP2.getText());
+        Carrera h=new Carrera(Integer.valueOf(tf_VelocidadP1.getText()),Integer.valueOf(tf_VelocidadP2.getText()),barra1,barra2,tf_ModeloP1.getText(),tf_ModeloP2.getText(),jf_Play,cronometroP1);
         Thread hilo1 = new Thread(h);
         hilo1.start();   
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -458,6 +457,16 @@ Archivos adm=new Archivos();
             } catch (IOException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
+             DefaultComboBoxModel m1=(DefaultComboBoxModel)cboxP1.getModel();
+             m1=new DefaultComboBoxModel();
+        DefaultComboBoxModel m2=(DefaultComboBoxModel)cboxP2.getModel();
+        m2=new DefaultComboBoxModel();
+        for (int i = 0; i < carros.size(); i++) {
+        m1.addElement(carros.get(i).getBrand());
+        m2.addElement(carros.get(i).getBrand());
+        }
+        cboxP1.setModel(m1);
+        cboxP2.setModel(m2);
            
     }//GEN-LAST:event_bt_CrearCarroActionPerformed
     }

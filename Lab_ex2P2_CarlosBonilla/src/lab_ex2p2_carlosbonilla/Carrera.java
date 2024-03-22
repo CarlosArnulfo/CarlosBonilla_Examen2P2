@@ -5,7 +5,9 @@
 package lab_ex2p2_carlosbonilla;
 
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 /**
@@ -19,15 +21,21 @@ public class Carrera implements Runnable{
    private JProgressBar p2;
    private String p1name;
    private String p2name;
+   private JFrame este;
 private JLabel cronometro;
 
-    public Carrera(int speedP1, int speedP2, JProgressBar p1, JProgressBar p2, JLabel cronometroP1, String p1name, String p2name) {
+    public Carrera(int speedP1, int speedP2, JProgressBar p1, JProgressBar p2, String p1name, String p2name, JFrame este, JLabel cronometro) {
         this.speedP1 = speedP1;
         this.speedP2 = speedP2;
         this.p1 = p1;
         this.p2 = p2;
-        this.cronometro = cronometroP1;
+        this.p1name = p1name;
+        this.p2name = p2name;
+        this.este = este;
+        this.cronometro = cronometro;
     }
+
+    
 
 
     public int getSpeedP1() {
@@ -83,5 +91,12 @@ private JLabel cronometro;
                 
             }
         };
+        if (p1.getValue()==p1.getMaximum()&&p2.getValue()==p2.getMaximum()) {
+            JOptionPane.showMessageDialog(este, "ES UN EMPATE");
+        }else if(p1.getValue()==p1.getMaximum()){
+            JOptionPane.showMessageDialog(este, "El ganador es el "+p1name);
+        }else{
+            JOptionPane.showMessageDialog(este, "El ganador es el "+p2name);
+        }
     }
 }
