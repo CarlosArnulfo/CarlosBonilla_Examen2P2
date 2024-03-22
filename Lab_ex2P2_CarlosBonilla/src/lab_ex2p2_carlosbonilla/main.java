@@ -5,6 +5,7 @@
 package lab_ex2p2_carlosbonilla;
 
 import com.sun.jdi.IntegerValue;
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,12 +13,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.sound.sampled.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lospe
  */
 public class main extends javax.swing.JFrame {
+    //ASIENTO 4, FILA 2,CARLOS BONILLA
 ArrayList <Carros> carros =new ArrayList();
 Archivos adm=new Archivos();
     /**
@@ -62,9 +66,8 @@ Archivos adm=new Archivos();
         jPanel2 = new javax.swing.JPanel();
         barra1 = new javax.swing.JProgressBar();
         barra2 = new javax.swing.JProgressBar();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        cronometroP2 = new javax.swing.JLabel();
+        jl_p1 = new javax.swing.JLabel();
+        jl_p2 = new javax.swing.JLabel();
         cronometroP1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         bt_crearCarros = new javax.swing.JButton();
@@ -106,7 +109,7 @@ Archivos adm=new Archivos();
             }
         });
 
-        sp_crearVelocidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 300, 1));
+        sp_crearVelocidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 300, 1));
 
         javax.swing.GroupLayout jp_CrearLayout = new javax.swing.GroupLayout(jp_Crear);
         jp_Crear.setLayout(jp_CrearLayout);
@@ -170,12 +173,9 @@ Archivos adm=new Archivos();
 
         barra2.setMaximum(300);
 
-        jLabel7.setText("Player 1");
+        jl_p1.setText("Player 1");
 
-        jLabel8.setText("Player 2");
-
-        cronometroP2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        cronometroP2.setText("00:00:00");
+        jl_p2.setText("Player 2");
 
         cronometroP1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         cronometroP1.setText("00:00:00");
@@ -185,38 +185,34 @@ Archivos adm=new Archivos();
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(barra1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
-                    .addComponent(barra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(385, 385, 385)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cronometroP2)
-                .addGap(89, 89, 89))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(392, 392, 392)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
+                .addComponent(jl_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(cronometroP1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(barra1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
+                            .addComponent(barra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(385, 385, 385)
+                        .addComponent(jl_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(jl_p1)
                     .addComponent(cronometroP1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(barra1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel8))
-                    .addComponent(cronometroP2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(barra1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(jl_p2)
                 .addGap(39, 39, 39)
                 .addComponent(barra2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(175, 175, 175))
@@ -423,12 +419,20 @@ Archivos adm=new Archivos();
     }//GEN-LAST:event_tf_VelocidadP2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       jf_Play.pack();
+        if (cboxP1.getSelectedIndex()==cboxP2.getSelectedIndex()) {
+            JOptionPane.showMessageDialog(this, "TIENES QUE ELEGIR 2 CARROS DIFERENTES");
+        }else{
+            jl_p1.setText(tf_ModeloP1.getText());
+            jl_p2.setText(tf_ModeloP2.getText());
+            jf_Play.pack();
        jf_Play.setLocationRelativeTo(this);
        jf_Play.setVisible(true);
-        Carrera h=new Carrera(Integer.valueOf(tf_VelocidadP1.getText()),Integer.valueOf(tf_VelocidadP2.getText()),barra1,barra2,tf_ModeloP1.getText(),tf_ModeloP2.getText(),jf_Play,cronometroP1);
+        Carrera h=new Carrera(Integer.valueOf(tf_VelocidadP1.getText()),Integer.parseInt(tf_VelocidadP2.getText()),barra1,barra2,tf_ModeloP1.getText(),tf_ModeloP2.getText(),jf_Play,cronometroP1);
         Thread hilo1 = new Thread(h);
-        hilo1.start();   
+        hilo1.start();  
+        }
+   
+         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cboxP2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxP2ItemStateChanged
@@ -471,7 +475,10 @@ Archivos adm=new Archivos();
     }//GEN-LAST:event_bt_CrearCarroActionPerformed
     }
     private void bt_crearCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearCarrosMouseClicked
-       jf_Crear.pack();
+
+     
+		
+        jf_Crear.pack();
        jf_Crear.setLocationRelativeTo(this);
        jf_Crear.setVisible(true);
     }//GEN-LAST:event_bt_crearCarrosMouseClicked
@@ -523,7 +530,6 @@ Archivos adm=new Archivos();
     private javax.swing.JComboBox<String> cboxP1;
     private javax.swing.JComboBox<String> cboxP2;
     private javax.swing.JLabel cronometroP1;
-    private javax.swing.JLabel cronometroP2;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -531,8 +537,6 @@ Archivos adm=new Archivos();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -540,6 +544,8 @@ Archivos adm=new Archivos();
     private javax.swing.JFrame jf_Play;
     private javax.swing.JLabel jl_marca;
     private javax.swing.JLabel jl_modelo;
+    private javax.swing.JLabel jl_p1;
+    private javax.swing.JLabel jl_p2;
     private javax.swing.JPanel jp_Crear;
     private javax.swing.JSpinner sp_crearVelocidad;
     private javax.swing.JTextField tf_MarcaP1;

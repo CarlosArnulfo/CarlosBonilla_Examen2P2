@@ -4,7 +4,16 @@
  */
 package lab_ex2p2_carlosbonilla;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -63,7 +72,13 @@ private JLabel cronometro;
         int minsP2=0;
         p1.setValue(0);
         p2.setValue(0);
-        while(p1.getValue()!=p1.getMaximum()&&p2.getValue()!=p2.getMaximum()){
+        try {
+            File file = new File("./CarroSonido.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+		Clip clip = AudioSystem.getClip();
+		clip.open(audioStream);
+                clip.start();
+                while(p1.getValue()!=p1.getMaximum()&&p2.getValue()!=p2.getMaximum()){
             if (milisp1==1000) {
                 secsp1+=1;
                 milisp1=0;
@@ -91,12 +106,23 @@ private JLabel cronometro;
                 
             }
         };
-        if (p1.getValue()==p1.getMaximum()&&p2.getValue()==p2.getMaximum()) {
-            JOptionPane.showMessageDialog(este, "ES UN EMPATE");
+        clip.close();
+         if (p1.getValue()==p1.getMaximum()&&p2.getValue()==p2.getMaximum()) {
+            JOptionPane.showMessageDialog(este, "ES UN EMPATE, TIEMPO: "+minsP1+":"+secsp1+":"+milisp1);
         }else if(p1.getValue()==p1.getMaximum()){
-            JOptionPane.showMessageDialog(este, "El ganador es el "+p1name);
+            JOptionPane.showMessageDialog(este, "El ganador es el "+p1name+" TIEMPO: "+minsP1+":"+secsp1+":"+milisp1);
         }else{
-            JOptionPane.showMessageDialog(este, "El ganador es el "+p2name);
+            JOptionPane.showMessageDialog(este, "El ganador es el "+p2name+" TIEMPO: "+minsP1+":"+secsp1+":"+milisp1);
         }
+        }catch(UnsupportedAudioFileException e){
+            e.printStackTrace();
+        }catch(IOException e){
+        e.printStackTrace();
+    } catch (LineUnavailableException ex) {
+        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+       
     }
 }
